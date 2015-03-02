@@ -12,17 +12,20 @@ require 'nokogiri'
 $root_url = 'http://www.mygoblet.org/'
 $owner_org = 'goblet'
 $lessons = {}
-$debug = false
+$debug = true
 
 def parse_data(page)
     topic_match = Regexp.new('topic-tags')
     audience_match = Regexp.new('audience-tags')
     portal_match = Regexp.new('training-portal')
 
-    #doc = Nokogiri::HTML(open($root_url + page))
-    f = File.open("goblet.html")
-    doc = Nokogiri::HTML(f)
-    f.close
+    if $debug
+        f = File.open("goblet.html")
+        doc = Nokogiri::HTML(f)
+        f.close
+    else
+        doc = Nokogiri::HTML(open($root_url + page))
+    end
 
     doc.search('tbody > tr').each do |row|
         key = nil
@@ -108,10 +111,13 @@ end
 ##################################################
 
 # Actually run the code here...
-#0.upto(2) do |p|
-#    parse_data('training-portal?page=' + p.to_s)
-#end
-parse_data('wibble')
+if $debug
+    0.upto(2) do |p|
+        parse_data('training-portal?page=' + p.to_s)
+    end
+else
+    parse_data('wibble')
+end
 
 
 # each individual tutorial
