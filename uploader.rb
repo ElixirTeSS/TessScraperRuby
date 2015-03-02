@@ -35,7 +35,7 @@ module Uploader
     # on whether they create packages, datasets &c.
     def self.do_upload(data,url,conf)
       # process data to json for uploading
-      puts "Trying URL: " + url
+      puts "Trying URL: #{url}"
 
       auth = conf['auth']
       if auth.nil?
@@ -51,13 +51,13 @@ module Uploader
         http.request(req)
       end
 
-      unless res.code == 200
+      unless res.code == '200'
         puts "Upload failed: #{res.code}"
         return {}
       end
 
       # package_create returns the created package as its result.
-      created_package = response.body['result']
+      created_package = res.body['result']
       puts created_package
       return created_package
     end
@@ -83,8 +83,33 @@ module Uploader
       return self.do_upload(data,url,conf)
     end
 
-    def self.check_dataset(dataset)
-
+    def self.check_dataset(data)
+      conf = self.get_config
+      action = '/api/3/action/package_show?id='
+      url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data.name
+      auth = conf['auth']
+      if auth.nil?
+          return nil
+      end
+      uri = URI(url)
+      puts "URL: #{url}"
+      req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
+      req.body = data.dump_json
+      req.add_field('Authorization', auth)
+      res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+        http.request(req)
+      end
+      unless res.code == '200'
+        puts "Check failed: #{res.code}"
+        return nil
+      end
+      checked_package = JSON.parse(res.body)['result']
+      #puts "CHECKED: #{checked_package}"
+      if checked_package
+        return checked_package
+      else
+        return nil
+      end
     end
 
     def self.update_dataset(data)

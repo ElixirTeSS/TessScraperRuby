@@ -38,7 +38,11 @@ module Tuition
         varname = var.to_s.gsub(/@/,'')
         hash[varname] = self.instance_variable_get var
       end
-      hash.to_json
+      return hash
+    end
+
+    def dump_json
+      return self.dump.to_json
     end
 
     def set_name(owner_org,item_name)

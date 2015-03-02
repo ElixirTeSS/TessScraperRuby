@@ -137,7 +137,8 @@ $lessons.each_key do |key|
 
     # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
     # as and where necessary.
-    Uploader.create_or_update(course.dump)
+    #Uploader.create_or_update(course.dump_json)
+    Uploader.check_dataset(course)
 
 end
 
