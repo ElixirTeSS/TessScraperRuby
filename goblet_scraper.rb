@@ -2,6 +2,7 @@
 
 load 'uploader.rb'
 load 'tuition.rb'
+load 'organisation.rb'
 
 require 'open-uri'
 require 'nokogiri'
@@ -121,6 +122,13 @@ else
     parse_data('training-portal?page=' + p.to_s)
   end
 end
+
+org_title = 'Goblet'
+org_name = 'goblet'
+org_desc = 'GOBLET, the Global Organisation for Bioinformatics Learning, Education and Training, is a legally registered foundation providing a global, sustainable support and networking structure for bioinformatics educators/trainers and students/trainees .'
+org_image_url = 'http://www.mygoblet.org/sites/default/files/logo_goblet_trans.png'
+organisation = Organisation.new(org_title,org_name,org_desc,org_image_url)
+Uploader.check_create_organisation(organisation)
 
 
 # each individual tutorial

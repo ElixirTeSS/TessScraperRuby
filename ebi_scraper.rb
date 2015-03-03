@@ -51,6 +51,13 @@ scrape_page(first_page)
     parse_data(page)
 end
 
+# Create the organisation.
+org_title = 'European Bioinformatics Institute (EBI)'
+org_name = 'european-bioinformatics-institute-ebi'
+org_desc = 'EMBL-EBI provides freely available data from life science experiments, performs basic research in computational biology and offers an extensive user training programme, supporting researchers in academia and industry.'
+org_image_url = 'http://www.theconsultants-e.com/Libraries/Clients/European_Bioinformatics_Institute.sflb.ashx'
+organisation = Organisation.new(org_title,org_name,org_desc,org_image_url)
+Uploader.check_create_organisation(organisation)
 
 
 # Upload all the data.

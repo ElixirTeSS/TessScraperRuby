@@ -37,6 +37,8 @@ module Tuition
         end
       end
     end
+    # Something funny is going on in those comparisons above. It seemed to affect the Python version as well.
+    # Often, something is marked as changed when it hasn't been...
     if changed
       return newdata
     else

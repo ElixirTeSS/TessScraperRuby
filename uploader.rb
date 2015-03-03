@@ -88,6 +88,17 @@ module Uploader
       conf = self.get_config
       action = '/api/3/action/package_show?id='
       url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data.name
+      return self.do_check(data,url,conf)
+    end
+
+    def self.check_organistion(data)
+      conf = self.get_config
+      action = '/api/3/action/organization_show?id='
+      url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data.name
+      return self.do_check(data,url,conf)
+    end
+
+    def self.do_check(data,url,conf)
       auth = conf['auth']
       if auth.nil?
           return nil
@@ -104,10 +115,10 @@ module Uploader
         puts "Check failed: #{res.code}"
         return nil
       end
-      checked_package = JSON.parse(res.body)['result']
-      #puts "CHECKED: #{checked_package}"
-      if checked_package
-        return checked_package
+      checked_result = JSON.parse(res.body)['result']
+      #puts "CHECKED: #{checked_result}"
+      if checked_result
+        return checked_result
       else
         return nil
       end
@@ -174,5 +185,16 @@ module Uploader
 
     end
 
+    def self.check_create_organisation(data)
+      if self.check_organistion(data).nil?
+        if self.create_organisation(data).nil?
+          puts "Failed to create organisation #{data.name}."
+        else
+          puts "Created organisation #{data.name}."
+        end
+      else
+        puts "Organisation #{data.name} already exists."
+      end
+    end
 
 end
