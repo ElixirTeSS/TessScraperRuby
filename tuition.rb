@@ -5,7 +5,36 @@ module Tuition
   # Compare a TuitionUnit or subclass thereof with some data already
   # in the TeSS site.
   def compare(current,tess)
-
+    dont_change = %w(id name created last_modified last_update package_id tags owner_org)
+    newdata = tess
+    changed = false
+    current.each_key do |key|
+      if key.nil? or dont_change.select {|k,v| k == key}
+        next
+      end
+      # Format can be created in lower case but comes back from the server in upper case...
+      if key == 'format'
+        if current[key].lower == tess[key].lower
+          newdata[key] = current[key]
+          changed = true
+        end
+      elsif current[key].class == 'Array'
+        if current[key] != eval(tess[key]) # convert to array for the comparison
+          newdata[key] = current[key]
+          changed = true
+        end
+      else
+        if current[key] == tess[key]
+          newdata[key] = current[key]
+          changed = true
+        end
+      end
+    end
+    if changed
+      return newdata
+    else
+      return nil
+    end
   end
 
   # Don't use this directly, create Tutorial or FaceToFace instances.
@@ -48,6 +77,7 @@ module Tuition
     def set_name(owner_org,item_name)
         @name = owner_org + '-' + item_name.downcase.gsub(/[^0-9a-z_-]/,'_')[0..99]
     end
+
   end
 
   # An on-line tutorial.

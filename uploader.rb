@@ -113,17 +113,54 @@ module Uploader
     end
 
     def self.update_dataset(data)
-
+      conf = self.get_config
+      action = '/api/3/action/package_update'
+      url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action
+      return self.do_upload(data,url,conf)
     end
 
     def self.update_resource(data)
-
+      conf = self.get_config
+      action = '/api/3/action/resource_update'
+      url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action
+      return self.do_upload(data,url,conf)
     end
 
     def self.create_or_update(data)
-      # Temporary placeholder code
-      self.create_dataset(data)
-      self.create_resource(data)
+      data_exists = self.check_dataset(data)
+      if !data_exists.nil?
+        # This has already been added to TeSS.
+        changes = Tuition.compare(data,data_exists)
+        if !changes.nil?
+          # There has been some change to the data and an update may be required.
+          puts 'DATASET: Something has changed.'
+          update = self.update_dataset(data)
+          if !update.nil?
+            puts 'Package updated.'
+            # Update the resources for each dataset.
+            data_exists['resources'].each do |res|
+              res_changes = Tuition.compare(data,res)
+              if !res_changes.nil?
+                res_updated = self.update_resource(res_changes)
+                if !res_updated.nil?
+                  puts 'Resource updated.'
+                end
+              end
+            end
+          end
+        else
+          puts 'DATASET: No change.'
+        end
+      else
+        # This is not present on TeSS and should be added.
+        dataset = self.create_dataset(data.json_dump)
+        if !dataset.nil?
+          data.package_id = dataset['id']
+          data.name = data.name + '-link'
+          self.create_resource(data.json_dump)
+        end
+      end
+
     end
 
 
