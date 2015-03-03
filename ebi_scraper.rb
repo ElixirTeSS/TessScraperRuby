@@ -1,10 +1,8 @@
 #!/usr/bin/env ruby
 
-load 'uploader.rb'
-load 'tuition.rb'
-
 require 'open-uri'
 require 'nokogiri'
+require 'tess_uploader'
 
 $root_url = 'http://www.ebi.ac.uk'
 $owner_org = 'european-bioinformatics-institute-ebi'
@@ -55,7 +53,7 @@ end
 org_title = 'European Bioinformatics Institute (EBI)'
 org_name = 'european-bioinformatics-institute-ebi'
 org_desc = 'EMBL-EBI provides freely available data from life science experiments, performs basic research in computational biology and offers an extensive user training programme, supporting researchers in academia and industry.'
-org_image_url = 'http://www.theconsultants-e.com/Libraries/Clients/European_Bioinformatics_Institute.sflb.ashx'
+org_image_url = 'http://www.ebi.ac.uk/miriam/static/main/img/EBI_logo.png'
 organisation = Organisation.new(org_title,org_name,org_desc,org_image_url)
 Uploader.check_create_organisation(organisation)
 

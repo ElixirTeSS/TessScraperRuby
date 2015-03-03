@@ -1,11 +1,8 @@
 #!/usr/bin/env ruby
 
-load 'uploader.rb'
-load 'tuition.rb'
-load 'organisation.rb'
-
 require 'open-uri'
 require 'nokogiri'
+require 'tess_uploader'
 
 $root_url = 'http://www.mygoblet.org/'
 $owner_org = 'goblet'
