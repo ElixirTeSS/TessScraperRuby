@@ -1,3 +1,5 @@
+load 'tuition.rb'
+
 require 'inifile'
 require 'net/http'
 
@@ -45,7 +47,7 @@ module Uploader
 
       uri = URI(url)
       req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
-      req.body = data
+      req.body = data.dump_json
       req.add_field('Authorization', auth)
       res = Net::HTTP.start(uri.hostname, uri.port) do |http|
         http.request(req)
@@ -57,8 +59,7 @@ module Uploader
       end
 
       # package_create returns the created package as its result.
-      created_package = res.body['result']
-      puts created_package
+      created_package = JSON.parse(res.body)['result']
       return created_package
     end
 
@@ -128,6 +129,7 @@ module Uploader
 
     def self.create_or_update(data)
       data_exists = self.check_dataset(data)
+      #puts "EXISTS: #{data_exists}"
       if !data_exists.nil?
         # This has already been added to TeSS.
         changes = Tuition.compare(data,data_exists)
@@ -153,11 +155,20 @@ module Uploader
         end
       else
         # This is not present on TeSS and should be added.
-        dataset = self.create_dataset(data.json_dump)
+        puts 'Creating dataset.'
+        dataset = self.create_dataset(data)
+        #puts "Dataset: #{dataset}"
         if !dataset.nil?
           data.package_id = dataset['id']
           data.name = data.name + '-link'
-          self.create_resource(data.json_dump)
+          #puts "Preparing to send: #{data.dump_json}"
+          resource = self.create_resource(data)
+          puts "resource: #{resource}"
+          if resource.nil?
+            puts 'Resource not created!'
+          end
+        else
+          puts 'Could not create dataset, so no resource created!'
         end
       end
 

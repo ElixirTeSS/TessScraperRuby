@@ -4,19 +4,26 @@ module Tuition
 
   # Compare a TuitionUnit or subclass thereof with some data already
   # in the TeSS site.
-  def compare(current,tess)
-    dont_change = %w(id name created last_modified last_update package_id tags owner_org)
+  def self.compare(current,tess)
+    dont_change = %w(id name created last_modified last_update package_id owner_org)
     newdata = tess
     changed = false
-    current.each_key do |key|
-      if key.nil? or dont_change.select {|k,v| k == key}
+    # Current is an instance of Tuition, and newdata is a hash
+    current.instance_variables.each do |var|
+      key = var.to_s.gsub(/@/,'')
+      #puts "Current: #{current[key]}"
+      #puts "TeSS: #{tess[key]}"
+      if key.nil? or dont_change.select {|k,v| k == key}.length > 0
+        #puts "Skipping..."
         next
       end
       # Format can be created in lower case but comes back from the server in upper case...
       if key == 'format'
-        if current[key].lower == tess[key].lower
-          newdata[key] = current[key]
-          changed = true
+        if !current[key].nil? and !tess[key].nil?
+          if current[key].downcase != tess[key].downcase
+            newdata[key] = current[key]
+            changed = true
+          end
         end
       elsif current[key].class == 'Array'
         if current[key] != eval(tess[key]) # convert to array for the comparison
@@ -24,7 +31,7 @@ module Tuition
           changed = true
         end
       else
-        if current[key] == tess[key]
+        if current[key] != tess[key]
           newdata[key] = current[key]
           changed = true
         end
@@ -40,7 +47,7 @@ module Tuition
   # Don't use this directly, create Tutorial or FaceToFace instances.
   class TuitionUnit
     attr_accessor :name, :title, :url, :notes, :tags, :package_id, :parent_id, :resources, :doi, :created,
-                  :last_modified, :format, :keywords, :difficulty, :owning_org, :audience
+                  :last_modified, :format, :keywords, :difficulty, :owner_org, :audience, :description
 
     def initialize
       @name = nil
@@ -57,8 +64,9 @@ module Tuition
       @format = nil
       @keywords = []
       @difficulty = nil
-      @owning_org = nil # CKAN owning organisation
+      @owner_org = nil # CKAN owning organisation
       @audience = []
+      @description = nil
     end
 
     def dump
@@ -75,7 +83,11 @@ module Tuition
     end
 
     def set_name(owner_org,item_name)
-        @name = owner_org + '-' + item_name.downcase.gsub(/[^0-9a-z_-]/,'_')[0..99]
+        @name = (owner_org + '-' + item_name.downcase.gsub(/[^0-9a-z_-]/,'_').gsub(/[_]+/,'_'))[0...99]
+    end
+
+    def [](var)
+      return self.send(var)
     end
 
   end

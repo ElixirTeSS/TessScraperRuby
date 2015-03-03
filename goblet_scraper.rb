@@ -12,7 +12,7 @@ require 'nokogiri'
 $root_url = 'http://www.mygoblet.org/'
 $owner_org = 'goblet'
 $lessons = {}
-$debug = true
+$debug = false
 
 def parse_data(page)
     topic_match = Regexp.new('topic-tags')
@@ -20,10 +20,16 @@ def parse_data(page)
     portal_match = Regexp.new('training-portal')
 
     if $debug
-        f = File.open("goblet.html")
-        doc = Nokogiri::HTML(f)
-        f.close
+        puts 'Opening local file.'
+        begin
+          f = File.open("goblet.html")
+          doc = Nokogiri::HTML(f)
+          f.close
+        rescue
+          puts "Failed to open goblet.html file."
+        end
     else
+        puts "Opening: #{$root_url + page}"
         doc = Nokogiri::HTML(open($root_url + page))
     end
 
@@ -101,9 +107,9 @@ def return_date(datestring)
     end
 
     diff = days + (weeks * 7) + (months * 30) + (years * 365)
-    earlier = today - diff
+    earlier = (today - diff).to_s
 
-    return earlier.to_s
+    return earlier.split(/\./)[0].gsub!('+00:00','') # Trim off final decimals and timezone
 end
 
 ##################################################
@@ -112,11 +118,11 @@ end
 
 # Actually run the code here...
 if $debug
-    0.upto(2) do |p|
-        parse_data('training-portal?page=' + p.to_s)
-    end
+  parse_data('a random string')
 else
-    parse_data('wibble')
+  0.upto(2) do |p|
+    parse_data('training-portal?page=' + p.to_s)
+  end
 end
 
 
@@ -124,21 +130,22 @@ end
 $lessons.each_key do |key|
     course = Tuition::Tutorial.new
     course.url = $root_url + key
-    course.owning_org = $owner_org
+    course.owner_org = $owner_org
     course.title = $lessons[key]['name']
     course.set_name($owner_org,$lessons[key]['name'])
     course.last_modified = $lessons[key]['last_modified']
     course.created = $lessons[key]['last_modified']
     course.audience = $lessons[key]['audience']
     course.keywords = $lessons[key]['topics']
+    course.description = $lessons[key]['name']
     course.format = 'html'
 
-    puts "Course: #{course.dump}"
+    #puts "Course: #{course.dump}"
 
     # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
     # as and where necessary.
-    #Uploader.create_or_update(course.dump_json)
-    Uploader.check_dataset(course)
+    Uploader.create_or_update(course)
+    #Uploader.check_dataset(course)
 
 end
 
