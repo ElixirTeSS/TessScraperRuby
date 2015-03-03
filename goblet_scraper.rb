@@ -6,9 +6,6 @@ load 'tuition.rb'
 require 'open-uri'
 require 'nokogiri'
 
-#config = Uploader.get_config
-#puts config['host']
-
 $root_url = 'http://www.mygoblet.org/'
 $owner_org = 'goblet'
 $lessons = {}
