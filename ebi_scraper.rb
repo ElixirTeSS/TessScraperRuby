@@ -11,28 +11,29 @@ $debug = false
 
 
 def parse_data(page)
+  doc = Nokogiri::HTML(open($root_url + page))
 
-end
+  #first = doc.css('div.item-list').search('li')
+  first = doc.css('li.views-row')
+  first.each do |f|
+    titles = f.css('div.views-field-title').css('span.field-content').search('a')
+    desc = f.css('div.views-field-field-course-desc-value').css('div.field-content').search('p')
+    topics = f.css('div.views-field-tid').css('span.field-content').search('a')
 
-def extract_keywords(text)
-  # Remove 'Topic:', newlines, and white space.
-  # Split into array of topics and reject any empty ones
-  # Format for CKAN Uploader
-  text.gsub!('Topic:', '')
-  text.gsub!(/\n/, '')
-  text.gsub!(/\s+/,' ')
-  keywords = text.split(' ')
-  tags = []
-  keywords.each do |keyword|
-    if keyword == '' or keyword.length < 3
-        keywords.delete(keyword)
-    else
-        tags << {'name' => keyword.gsub!(/\W+/,'')}
-    end
+    #puts "TITLES: #{titles.css('a')[0]['href']}, #{titles.text}"
+    #puts "DESC: #{desc.text}"
+    #puts "TOPICS: #{topics.collect{|t| t.text }}"
+
+    href = titles.css('a')[0]['href']
+    $lessons[href] = {}
+    $lessons[href]['description'] = desc
+    $lessons[href]['text'] = titles.text
+    $lessons[href]['topics'] = topics.map{|t| {'name' => t.text} } # Replaces extract_keywords
+
   end
-  return tags
 
 end
+
 
 def last_page_number
   # This method needs to be updated to find the actual final page.
@@ -42,12 +43,13 @@ end
 
 # Scrape all the pages.
 first_page = '/training/online/course-list'
-scrape_page(first_page)
-1.upto(last_page_number) do |num|
-    page = first_page + '?page=' + num.to_s
-    puts "Scraping page: #{num.to_s}"
-    parse_data(page)
-end
+parse_data(first_page)
+#1.upto(last_page_number) do |num|
+#    page = first_page + '?page=' + num.to_s
+#    puts "Scraping page: #{num.to_s}"
+#    parse_data(page)
+#end
+
 
 # Create the organisation.
 org_title = 'European Bioinformatics Institute (EBI)'
@@ -63,14 +65,15 @@ $lessons.each_key do |key|
   course = Tuition::Tutorial.new
   course.url = $root_url + key
   course.owner_org = $owner_org
-  course.title = $lessons[key]['name']
+  course.title = $lessons[key]['text']
   course.notes = $lessons[key]['description']
-  course.set_name($owner_org,$lessons[key]['name'])
+  course.set_name($owner_org,$lessons[key]['text'])
   course.tags = $lessons[key]['topics']
   course.format = 'html'
 
   # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
   # as and where necessary.
   Uploader.create_or_update(course)
+  #puts "COURSE: #{course.to_json}"
 
 end
