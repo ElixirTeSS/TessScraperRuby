@@ -26,9 +26,10 @@ def parse_data(page)
 
     href = titles.css('a')[0]['href']
     $lessons[href] = {}
-    $lessons[href]['description'] = desc
-    $lessons[href]['text'] = titles.text
-    $lessons[href]['topics'] = topics.map{|t| {'name' => t.text} } # Replaces extract_keywords
+    $lessons[href]['description'] = desc.text.strip
+    $lessons[href]['text'] = titles.css('a')[0].text
+    $lessons[href]['topics'] = topics.map{|t| {'name' => t.text.gsub!(/\W/,'')} } # Replaces extract_keywords
+                                                                                  # Non-alphanumeric purged
 
   end
 
@@ -44,11 +45,11 @@ end
 # Scrape all the pages.
 first_page = '/training/online/course-list'
 parse_data(first_page)
-#1.upto(last_page_number) do |num|
-#    page = first_page + '?page=' + num.to_s
-#    puts "Scraping page: #{num.to_s}"
-#    parse_data(page)
-#end
+1.upto(last_page_number) do |num|
+    page = first_page + '?page=' + num.to_s
+    puts "Scraping page: #{num.to_s}"
+    parse_data(page)
+end
 
 
 # Create the organisation.
@@ -73,7 +74,7 @@ $lessons.each_key do |key|
 
   # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
   # as and where necessary.
-  Uploader.create_or_update(course)
   #puts "COURSE: #{course.to_json}"
+  Uploader.create_or_update(course)
 
 end

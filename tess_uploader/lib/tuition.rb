@@ -53,7 +53,7 @@ module Tuition
     if changed
       return newdata
     else
-      return nil
+      return {}
     end
   end
 

@@ -60,7 +60,10 @@ def parse_data(page)
         # This relative date needs to be fixed later
         stuff.slice! "#{name}"
         date_modified = return_date(stuff)
-        $lessons[key] = {'audience' => audience, 'topics' => topics, 'last_modified' => date_modified, 'name' => name}
+        $lessons[key] = {'audience' => audience, # could be treated similarly to topics
+                         'topics' => topics.map{|t| {'name' => t} },
+                         'last_modified' => date_modified,
+                         'name' => name}
         if $debug
             puts "Key: #{key}"
             puts "Lessons: #{$lessons[key]}"

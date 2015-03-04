@@ -108,7 +108,7 @@ module Uploader
     puts "Trying URL: #{url}"
     auth = conf['auth']
     if auth.nil?
-      return nil
+      return {}
     end
     uri = URI(url)
     puts "URL: #{url}"
@@ -120,14 +120,14 @@ module Uploader
     end
     unless res.code == '200'
       puts "Check failed: #{res.code}"
-      return nil
+      return {}
     end
     checked_result = JSON.parse(res.body)['result']
     #puts "CHECKED: #{checked_result}"
     if checked_result
       return checked_result
     else
-      return nil
+      return {}
     end
   end
 
@@ -148,31 +148,34 @@ module Uploader
   def self.create_or_update(data)
     data_exists = self.check_dataset(data)
     #puts "EXISTS: #{data_exists}"
-    if !data_exists.nil?
+    if !data_exists.empty?
       # This has already been added to TeSS.
       resources = data_exists['resources']
       #puts "RESOURCES: #{resources}"
       changes = Tuition.compare(data,data_exists)
-      if !changes.nil?
+      if !changes.empty?
         # There has been some change to the data and an update may be required.
         puts 'DATASET: Something has changed.'
         update = self.update_dataset(changes)
-        if !update.nil?
+        if !update.empty?
           puts 'Package updated.'
           # Update the resources for each dataset.
           if data_exists['resources'].length > 0
             resources.each do |res|
               #puts "RES: #{res}"
               res_changes = Tuition.compare(data,res)
-              if !res_changes.nil?
+              if !res_changes.empty?
                 # It appears that the previous update to the dataset wipes out all the resources. Therefore,
                 # the only option would seem to be to create the resource again.
                 res_changes['package_id'] = data_exists['id']
                 res_changes['name'] = data_exists['name'] + '-link'
+                res_changes.delete('resources')
                 res_updated = self.create_resource(res_changes)
                 #res_updated = self.update_resource(res_changes)
-                if !res_updated.nil?
+                if !res_updated.empty?
                   puts 'Resource updated.'
+                else
+                  puts 'Failed to update resource.'
                 end
               end
             end
@@ -181,9 +184,12 @@ module Uploader
             # or earlier scripts have wiped out the resources.
             data.package_id = data_exists['id']
             data.name = data_exists['name'] + '-link'
-            res_updated = self.create_resource(data)
-            if !res_updated.nil?
+            res_updated = self.create_resource(data.dump.delete('resources'))
+            #puts "DATA: #{data.dump}"
+            if !res_updated.empty?
               puts 'Missing resource recreated.'
+            else
+              puts 'Failed to recreate missing resource.'
             end
           end
         end
@@ -198,8 +204,8 @@ module Uploader
       if !dataset.nil?
         data.package_id = dataset['id']
         data.name = data.name + '-link'
+        resource = self.create_resource(data.dump.delete('resources'))
         #puts "Preparing to send: #{data.to_json}"
-        resource = self.create_resource(data)
         puts "resource: #{resource}"
         if resource.nil?
           puts 'Resource not created!'
