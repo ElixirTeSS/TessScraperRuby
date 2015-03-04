@@ -5,7 +5,9 @@ module Tuition
   # Compare a TuitionUnit or subclass thereof with some data already
   # in the TeSS site.
   def self.compare(current,tess)
-    dont_change = %w(id name created last_modified last_update package_id owner_org)
+    debug = false
+    # TODO: Tags need to be fixed...
+    dont_change = %w(id name created last_modified last_update package_id owner_org tags keywords audience url)
     newdata = tess
     changed = false
     # Current is an instance of Tuition, and newdata is a hash
@@ -15,23 +17,28 @@ module Tuition
       #puts "TeSS: #{tess[key]}"
       if key.nil? or dont_change.select {|k,v| k == key}.length > 0
         #puts "Skipping..."
+        print '.'
         next
       end
       # Format can be created in lower case but comes back from the server in upper case...
       if key == 'format'
         if !current[key].nil? and !tess[key].nil?
           if current[key].downcase != tess[key].downcase
+            #puts "CHANGE(1) #{newdata[key]}, #{current[key]}"
             newdata[key] = current[key]
             changed = true
           end
         end
       elsif current[key].class == 'Array'
         if current[key] != eval(tess[key]) # convert to array for the comparison
+          #puts "CHANGE(2) #{newdata[key]}, #{current[key]}"
           newdata[key] = current[key]
           changed = true
         end
       else
         if current[key] != tess[key]
+          #puts "KEY: #{key}"
+          #puts "CHANGE(3) #{newdata[key]}, #{current[key]}"
           newdata[key] = current[key]
           changed = true
         end
@@ -39,6 +46,10 @@ module Tuition
     end
     # Something funny is going on in those comparisons above. It seemed to affect the Python version as well.
     # Often, something is marked as changed when it hasn't been...
+    if debug
+      puts "Original: #{tess}"
+      puts "Changed: #{newdata}"
+    end
     if changed
       return newdata
     else
@@ -80,7 +91,7 @@ module Tuition
       return hash
     end
 
-    def dump_json
+    def to_json
       return self.dump.to_json
     end
 

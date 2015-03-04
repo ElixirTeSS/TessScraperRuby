@@ -140,6 +140,7 @@ $lessons.each_key do |key|
     course.audience = $lessons[key]['audience']
     course.keywords = $lessons[key]['topics']
     course.description = $lessons[key]['name']
+    course.notes = "#{$lessons[key]['name']} from #{$root_url + key}, added automatically."
     course.format = 'html'
 
     #puts "Course: #{course.dump}"

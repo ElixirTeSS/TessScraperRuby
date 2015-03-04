@@ -17,7 +17,7 @@ class Organisation
     return hash
   end
 
-  def dump_json
+  def to_json
     return self.dump.to_json
   end
 

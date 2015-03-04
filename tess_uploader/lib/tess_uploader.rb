@@ -53,7 +53,7 @@ module Uploader
 
     uri = URI(url)
     req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
-    req.body = data.dump_json
+    req.body = data.to_json
     req.add_field('Authorization', auth)
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(req)
@@ -93,18 +93,19 @@ module Uploader
   def self.check_dataset(data)
     conf = self.get_config
     action = '/api/3/action/package_show?id='
-    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data.name
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data['name']
     return self.do_check(data,url,conf)
   end
 
   def self.check_organistion(data)
     conf = self.get_config
     action = '/api/3/action/organization_show?id='
-    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data.name
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data['name']
     return self.do_check(data,url,conf)
   end
 
   def self.do_check(data,url,conf)
+    puts "Trying URL: #{url}"
     auth = conf['auth']
     if auth.nil?
       return nil
@@ -112,7 +113,7 @@ module Uploader
     uri = URI(url)
     puts "URL: #{url}"
     req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
-    req.body = data.dump_json
+    req.body = data.to_json
     req.add_field('Authorization', auth)
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(req)
@@ -132,15 +133,15 @@ module Uploader
 
   def self.update_dataset(data)
     conf = self.get_config
-    action = '/api/3/action/package_update'
-    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action
+    action = '/api/3/action/package_update?id='
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data['id']
     return self.do_upload(data,url,conf)
   end
 
   def self.update_resource(data)
     conf = self.get_config
-    action = '/api/3/action/resource_update'
-    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action
+    action = '/api/3/action/resource_update?id='
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data['id']
     return self.do_upload(data,url,conf)
   end
 
@@ -149,21 +150,40 @@ module Uploader
     #puts "EXISTS: #{data_exists}"
     if !data_exists.nil?
       # This has already been added to TeSS.
+      resources = data_exists['resources']
+      #puts "RESOURCES: #{resources}"
       changes = Tuition.compare(data,data_exists)
       if !changes.nil?
         # There has been some change to the data and an update may be required.
         puts 'DATASET: Something has changed.'
-        update = self.update_dataset(data)
+        update = self.update_dataset(changes)
         if !update.nil?
           puts 'Package updated.'
           # Update the resources for each dataset.
-          data_exists['resources'].each do |res|
-            res_changes = Tuition.compare(data,res)
-            if !res_changes.nil?
-              res_updated = self.update_resource(res_changes)
-              if !res_updated.nil?
-                puts 'Resource updated.'
+          if data_exists['resources'].length > 0
+            resources.each do |res|
+              #puts "RES: #{res}"
+              res_changes = Tuition.compare(data,res)
+              if !res_changes.nil?
+                # It appears that the previous update to the dataset wipes out all the resources. Therefore,
+                # the only option would seem to be to create the resource again.
+                res_changes['package_id'] = data_exists['id']
+                res_changes['name'] = data_exists['name'] + '-link'
+                res_updated = self.create_resource(res_changes)
+                #res_updated = self.update_resource(res_changes)
+                if !res_updated.nil?
+                  puts 'Resource updated.'
+                end
               end
+            end
+          else
+            # No resources, so create one. This might be the case because previous bugs with this
+            # or earlier scripts have wiped out the resources.
+            data.package_id = data_exists['id']
+            data.name = data_exists['name'] + '-link'
+            res_updated = self.create_resource(data)
+            if !res_updated.nil?
+              puts 'Missing resource recreated.'
             end
           end
         end
@@ -178,7 +198,7 @@ module Uploader
       if !dataset.nil?
         data.package_id = dataset['id']
         data.name = data.name + '-link'
-        #puts "Preparing to send: #{data.dump_json}"
+        #puts "Preparing to send: #{data.to_json}"
         resource = self.create_resource(data)
         puts "resource: #{resource}"
         if resource.nil?
