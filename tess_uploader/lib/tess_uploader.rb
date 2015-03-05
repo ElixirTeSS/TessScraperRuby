@@ -47,7 +47,7 @@ module Uploader
 
     auth = conf['auth']
     if auth.nil?
-      puts "API string missing!"
+      puts 'API string missing!'
       return
     end
 
@@ -58,6 +58,9 @@ module Uploader
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(req)
     end
+
+    puts "DATA: #{data}"
+    puts "DATA TO JSON: #{data.to_json}"
 
     unless res.code == '200'
       puts "Upload failed: #{res.code}"
@@ -184,7 +187,9 @@ module Uploader
             # or earlier scripts have wiped out the resources.
             data.package_id = data_exists['id']
             data.name = data_exists['name'] + '-link'
-            res_updated = self.create_resource(data.dump.delete('resources'))
+            #puts "DUMP1: #{data.dump}"
+            #puts "DUMP2: #{data.dump.delete_if {|key,value| key == 'resources'}}"
+            res_updated = self.create_resource(data.dump.delete_if {|key,value| key == 'resources'})
             #puts "DATA: #{data.dump}"
             if !res_updated.empty?
               puts 'Missing resource recreated.'
@@ -204,7 +209,7 @@ module Uploader
       if !dataset.nil?
         data.package_id = dataset['id']
         data.name = data.name + '-link'
-        resource = self.create_resource(data.dump.delete('resources'))
+        resource = self.create_resource(data.dump.delete_if {|key,value| key == 'resources'})
         #puts "Preparing to send: #{data.to_json}"
         puts "resource: #{resource}"
         if resource.nil?
