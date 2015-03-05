@@ -51,16 +51,23 @@ module Uploader
       return
     end
 
+
     uri = URI(url)
     req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
+    puts "CLASS: #{data.class}"
     req.body = data.to_json
+    if data.class == Hash
+      req.body = data.delete_if {|key,value| key == 'resources'}.to_json
+      print "BODY(1): #{req.body}"
+    else
+      body = data.dump
+      req.body = body.delete_if {|key,value| key == 'resources'}.to_json
+      print "BODY(2): #{req.body}"
+    end
     req.add_field('Authorization', auth)
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(req)
     end
-
-    puts "DATA: #{data}"
-    puts "DATA TO JSON: #{data.to_json}"
 
     unless res.code == '200'
       puts "Upload failed: #{res.code}"
@@ -163,7 +170,7 @@ module Uploader
         if !update.empty?
           puts 'Package updated.'
           # Update the resources for each dataset.
-          if data_exists['resources'].length > 0
+          if !data_exists['resources'].nil? and data_exists['resources'].length > 0
             resources.each do |res|
               #puts "RES: #{res}"
               res_changes = Tuition.compare(data,res)
@@ -172,9 +179,8 @@ module Uploader
                 # the only option would seem to be to create the resource again.
                 res_changes['package_id'] = data_exists['id']
                 res_changes['name'] = data_exists['name'] + '-link'
-                res_changes.delete('resources')
-                res_updated = self.create_resource(res_changes)
-                #res_updated = self.update_resource(res_changes)
+                #res_updated = self.create_resource(res_changes.delete_if {|key,value| key == 'resources'})
+                res_updated = self.update_resource(res_changes)
                 if !res_updated.empty?
                   puts 'Resource updated.'
                 else
@@ -189,7 +195,7 @@ module Uploader
             data.name = data_exists['name'] + '-link'
             #puts "DUMP1: #{data.dump}"
             #puts "DUMP2: #{data.dump.delete_if {|key,value| key == 'resources'}}"
-            res_updated = self.create_resource(data.dump.delete_if {|key,value| key == 'resources'})
+            res_updated = self.create_resource(data)
             #puts "DATA: #{data.dump}"
             if !res_updated.empty?
               puts 'Missing resource recreated.'
@@ -209,7 +215,7 @@ module Uploader
       if !dataset.nil?
         data.package_id = dataset['id']
         data.name = data.name + '-link'
-        resource = self.create_resource(data.dump.delete_if {|key,value| key == 'resources'})
+        resource = self.create_resource(data)
         #puts "Preparing to send: #{data.to_json}"
         puts "resource: #{resource}"
         if resource.nil?
