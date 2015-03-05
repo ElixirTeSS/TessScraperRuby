@@ -54,15 +54,14 @@ module Uploader
 
     uri = URI(url)
     req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
-    puts "CLASS: #{data.class}"
     req.body = data.to_json
     if data.class == Hash
-      req.body = data.delete_if {|key,value| key == 'resources'}.to_json
-      print "BODY(1): #{req.body}"
+      req.body = data.delete_if {|key,value| key == 'tags'}.to_json
+      #puts "BODY(1): #{req.body}"
     else
       body = data.dump
-      req.body = body.delete_if {|key,value| key == 'resources'}.to_json
-      print "BODY(2): #{req.body}"
+      req.body = body.delete_if {|key,value| key == 'tags'}.to_json
+      #puts "BODY(2): #{req.body}"
     end
     req.add_field('Authorization', auth)
     res = Net::HTTP.start(uri.hostname, uri.port) do |http|
@@ -71,6 +70,7 @@ module Uploader
 
     unless res.code == '200'
       puts "Upload failed: #{res.code}"
+      puts "ERROR: #{res.body}"
       return {}
     end
 

@@ -141,7 +141,7 @@ $lessons.each_key do |key|
     course.last_modified = $lessons[key]['last_modified']
     course.created = $lessons[key]['last_modified']
     course.audience = $lessons[key]['audience']
-    course.keywords = $lessons[key]['topics']
+    course.tags = $lessons[key]['topics']
     course.description = $lessons[key]['name']
     course.notes = "#{$lessons[key]['name']} from #{$root_url + key}, added automatically."
     course.format = 'html'
