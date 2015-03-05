@@ -28,7 +28,7 @@ def parse_data(page)
     $lessons[href] = {}
     $lessons[href]['description'] = desc.text.strip
     $lessons[href]['text'] = titles.css('a')[0].text
-    $lessons[href]['topics'] = topics.map{|t| {'name' => t.text.gsub!(/\W/,'')} } # Replaces extract_keywords
+    $lessons[href]['topics'] = topics.map{|t| {'name' => t.text.gsub!(/\W/,' ')} } # Replaces extract_keywords
                                                                                   # Non-alphanumeric purged
 
   end

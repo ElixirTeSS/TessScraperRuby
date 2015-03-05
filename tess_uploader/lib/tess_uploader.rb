@@ -229,8 +229,8 @@ module Uploader
   end
 
   def self.check_create_organisation(data)
-    if self.check_organistion(data).nil?
-      if self.create_organisation(data).nil?
+    if self.check_organistion(data).empty?
+      if self.create_organisation(data).empty?
         puts "Failed to create organisation #{data.name}."
       else
         puts "Created organisation #{data.name}."
