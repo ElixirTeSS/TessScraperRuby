@@ -6,6 +6,7 @@ class TessUploader
   require 'net/http'
   require 'organisation'
   require 'tuition'
+  require 'node'
 end
 
 
