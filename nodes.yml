@@ -6,6 +6,118 @@ Belgium:
     trc: ''
     hon: ''
 
+Czech Republic:
+    country_code: CZ
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Denmark:
+    country_code: DK
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+EMBL EBI:
+    country_code: EMBL-EBI
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Estonia:
+    country_code: EE
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Finland:
+    country_code: FI
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+France:
+    country_code: FR
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Greece:
+    country_code: GR
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Israel:
+    country_code: IL
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Italy:
+    country_code: IT
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Netherlands:
+    country_code: NL
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Norway:
+    country_code: NO
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Portugal:
+    country_code: PT
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Slovenia:
+    country_code: SI
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
+Spain:
+    country_code: ES
+    description: ''
+    image_url: ''
+    tec: ''
+    trc: ''
+    hon: ''
+
 Sweden:
     country_code: SE
     description: ''
@@ -14,10 +126,19 @@ Sweden:
     trc: ''
     hon: ''
 
-Germany:
-    country_code: DL
+Switzerland:
+    country_code: CH
     description: ''
     image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    tec: 'Heinz Stockinger'
+    trc: 'Patricia Palagi'
+    hon: 'Rob Appel'
+
+United Kingdom:
+    country_code: GB
+    description: ''
+    image_url: ''
+    hon : 'Chris Ponting'
+    trc: 'Rita Hendricusdottir'
+    tec: 'Manuel Corpas'
+
