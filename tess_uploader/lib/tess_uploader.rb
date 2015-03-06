@@ -100,6 +100,20 @@ module Uploader
     return self.do_upload(data,url,conf)
   end
 
+  def self.create_node(data)
+    conf = self.get_config
+    action = '/api/3/action/group_create'
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action
+    return self.do_upload(data,url,conf)
+  end
+
+  def self.create_group(data)
+    conf = self.get_config
+    action = '/api/3/action/group_create'
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action
+    return self.do_upload(data,url,conf)
+  end
+
   def self.check_dataset(data)
     conf = self.get_config
     action = '/api/3/action/package_show?id='
