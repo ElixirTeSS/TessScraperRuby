@@ -101,6 +101,16 @@ module Uploader
     return self.do_upload(data,url,conf)
   end
 
+  def self.create_or_update_node(data)
+       tess_node = Uploader.check_node(data)
+       if tess_node.nil? || tess_node.empty?
+            Uploader.create_node(data)
+       else
+            data.update_id(tess_node['id'])
+            Uploader.update_node(data)
+       end
+  end
+
   def self.create_node(data)
     conf = self.get_config
     action = '/api/3/action/group_create'
