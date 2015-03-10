@@ -76,6 +76,7 @@ EMBL EBI:
     hon:
       name:
       email:
+    twitter: emblebi
 
 Estonia:
     country_code: EE
@@ -292,3 +293,4 @@ United Kingdom:
     hon:
       name: Chris Ponting
       email: chris.ponting@dpag.ox.ac.uk
+    twitter: '@ElixirNodeUK'

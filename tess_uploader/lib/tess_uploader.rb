@@ -108,6 +108,20 @@ module Uploader
     return self.do_upload(data,url,conf)
   end
 
+  def self.check_node(data)
+    conf = self.get_config
+    action = '/api/3/action/group_show?id='
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data['name']
+    return self.do_check(data,url,conf)
+  end
+
+  def self.update_node(data)
+    conf = self.get_config
+    action = '/api/3/action/group_update?id='
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action + data['id']
+    return self.do_upload(data,url,conf)
+  end
+  
   def self.create_group(data)
     conf = self.get_config
     action = '/api/3/action/group_create'
@@ -144,7 +158,7 @@ module Uploader
       http.request(req)
     end
     unless res.code == '200'
-      puts "Check failed: #{res.code}"
+      puts "Check returned: #{res.code}"
       return {}
     end
     checked_result = JSON.parse(res.body)['result']

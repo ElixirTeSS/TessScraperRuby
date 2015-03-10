@@ -1,8 +1,8 @@
 class Node
-  attr_accessor :title, :name, :country_code, :description, :home_page, :image_url, 
+  attr_accessor :title, :name, :country_code, :description, :id, :home_page, :image_url, :twitter,
                 :tec, :tec_email, :trc, :trc_email, :hon, :hon_email
 
-  def initialize(title,name,country_code,description=nil,home_page=nil,image_url=nil,
+  def initialize(title,name,country_code,description=nil,home_page=nil,image_url=nil, twitter=nil,
                  tec_name=nil, tec_email=nil,
                  trc_name=nil, trc_email=nil, 
                  hon_name=nil, hon_email=nil)
@@ -13,12 +13,17 @@ class Node
     @description = description
     @home_page = home_page
     @image_url = image_url
+    @twitter = twitter
     @trc = trc_name
     @trc_email = trc_email
     @tec = tec_name
     @tec_email = tec_email
     @hon = hon_name
     @hon_email = hon_email
+  end
+
+  def update_id(id)
+    @id = id    
   end
 
   def dump
