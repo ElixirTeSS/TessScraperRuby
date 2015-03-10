@@ -1,16 +1,24 @@
 class Node
-  attr_accessor :title, :name, :country_code, :description, :image_url, :tec, :trc, :hon
+  attr_accessor :title, :name, :country_code, :description, :home_page, :image_url, 
+                :tec, :tec_email, :trc, :trc_email, :hon, :hon_email
 
-  def initialize(title,name,country_code,description=nil,image_url=nil,tec=nil,trc=nil,hon=nil)
+  def initialize(title,name,country_code,description=nil,home_page=nil,image_url=nil,
+                 tec_name=nil, tec_email=nil,
+                 trc_name=nil, trc_email=nil, 
+                 hon_name=nil, hon_email=nil)
     @type = 'node'
     @title = title || nil
     @name = name || nil
     @country_code = country_code || nil
     @description = description
-    @trc = trc
-    @tec = tec
-    @hon = hon
+    @home_page = home_page
     @image_url = image_url
+    @trc = trc_name
+    @trc_email = trc_email
+    @tec = tec_name
+    @tec_email = tec_email
+    @hon = hon_name
+    @hon_email = hon_email
   end
 
   def dump

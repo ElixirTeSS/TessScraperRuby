@@ -1,144 +1,294 @@
+# HELP
+
+# TeSS aims to provide a portal of information. We don't have the resources
+# to create or curate data ourselves. As such it is our hope that the
+# ELIXIR community will contribute information about their node by adding details
+# of your node below and updating them whenever appropriate.
+# To do this simply find your country below (or copy and paste a new one if it
+# is not there) and fill in the details.
+# An explanation of each field is written below.
+
+# Country Name:
+#   country_code: <2 character ISO-3166 standard: see http://en.wikipedia.org/wiki/ISO_3166-1#Officially_assigned_code_elements)
+#   description: 1 paragraph describing your nodes core aims and strategies.
+#   home_page: A link to find out more about the node.
+#   image_url: A wide image (approximately 300px x 900px dimensions) to be used as a banner
+#   tec: TEchnical Co-ordinator - the name and email of
+#   trc: TRaining Co-ordinator - the name and email of
+#   hon: Head Of Node - the name and email of
+
 Belgium:
     country_code: BE
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Czech Republic:
     country_code: CZ
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Denmark:
     country_code: DK
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 EMBL EBI:
     country_code: EMBL-EBI
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Estonia:
     country_code: EE
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Finland:
     country_code: FI
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 France:
     country_code: FR
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Greece:
     country_code: GR
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Israel:
     country_code: IL
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Italy:
     country_code: IT
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
+
 
 Netherlands:
     country_code: NL
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Norway:
     country_code: NO
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
 
 Portugal:
     country_code: PT
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
+
 
 Slovenia:
     country_code: SI
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
+
 
 Spain:
     country_code: ES
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
+
 
 Sweden:
     country_code: SE
-    description: ''
-    image_url: ''
-    tec: ''
-    trc: ''
-    hon: ''
+    description:
+    home_page:
+    image_url:
+    tec:
+      name:
+      email:
+    trc:
+      name:
+      email:
+    hon:
+      name:
+      email:
+
 
 Switzerland:
     country_code: CH
-    description: ''
-    image_url: ''
-    tec: 'Heinz Stockinger'
-    trc: 'Patricia Palagi'
-    hon: 'Rob Appel'
+    description:
+    home_page:
+    image_url:
+    tec:
+      name: 'Heinz Stockinger'
+      email:
+    trc:
+      name: 'Patricia Palagi'
+      email:
+    hon:
+      name: 'Rob Appel'
+      email:
+
 
 United Kingdom:
     country_code: GB
-    description: ''
-    image_url: ''
-    hon : 'Chris Ponting'
-    trc: 'Rita Hendricusdottir'
-    tec: 'Manuel Corpas'
-
+    description: ELIXIR UK, a part of the ELIXIR community, is taking a UK and European lead in training. ELIXIR UK’s aim, to facilitate access to training in UK and across Europe for scientists in both academia and industry, will allow researchers to combine their experimental expertise with available computational infrastructure to address critical research questions. Only then will biological Big Data be transformed efficiently into meaningful results that lead to new discoveries and innovations.
+    home_page: http://elixir-uk.org
+    image_url:
+    tec:
+      name: Manuel Corpas
+      email: Manuel.Corpas@tgac.ac.uk
+    trc:
+      name: Rita Hendrdicusdottir
+      email: rita.hendricusdottir@dpag.ox.ac.uk
+    hon:
+      name: Chris Ponting
+      email: chris.ponting@dpag.ox.ac.uk
