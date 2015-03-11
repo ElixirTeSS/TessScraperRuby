@@ -7,7 +7,7 @@ require 'tess_uploader'
 $root_url = 'http://genome3d.eu/'
 $owner_org = 'genome3d'
 $lessons = {}
-$debug = true
+$debug = false
 
 
 def parse_data(page)
@@ -27,14 +27,28 @@ def parse_data(page)
   end
 
   # Now to obtain the exciting course information!
+  #links = doc.css('#wiki-content-container').search('li')
+  #links.each do |li|
+  #  puts "LI: #{li}"
+  #end
+
+  # This is not great as it does not get the description, but parsing that is a total pain.
+  # It can be found in #wiki-content-container if anyone wants a go.
+  links = doc.css('#context-menu').search('ul')[0].search('li')
+  links.each do |link|
+    # Chomp due to extraneous \n on each line.
+    href = link.search('a')[0]['href'].chomp
+    text = link.text.gsub(/Tutorial: /,'').chomp
+    next if href =~ /Index/
+    $lessons[href] = {}
+    $lessons[href]['name'] = text
+  end
 
 end
-
 
 # parse the data
 parse_data('tutorials/page/Public/Page/Tutorial/Index')
 
-__END__
 
 # create the organisation
 org_title = 'Genome 3D'
@@ -54,18 +68,14 @@ $lessons.each_key do |key|
   course.owner_org = $owner_org
   course.title = $lessons[key]['name']
   course.set_name($owner_org,$lessons[key]['name'])
-  course.last_modified = $lessons[key]['last_modified']
-  course.created = $lessons[key]['last_modified']
-  course.audience = $lessons[key]['audience']
-  course.tags = $lessons[key]['topics']
   course.description = $lessons[key]['name']
   course.notes = "#{$lessons[key]['name']} from #{$root_url + key}, added automatically."
   course.format = 'html'
 
   # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
   # as and where necessary.
-  #Uploader.create_or_update(course)
-  print "Course: "
-  pprint.pprint(course)
+  Uploader.create_or_update(course)
+  #print "Course: #{course.dump}"
+
 
 end
