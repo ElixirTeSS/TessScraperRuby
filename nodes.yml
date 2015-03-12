@@ -1,9 +1,9 @@
 # HELP
 
 # TeSS aims to provide a portal of information. We don't have the resources
-# to create or curate data ourselves. As such it is our hope that the
+# to create or curate the data ourselves. As such it is our hope that the
 # ELIXIR community will contribute information about their node by adding details
-# of your node below and updating them whenever appropriate.
+# below and updating them whenever they change.
 # To do this simply find your country below (or copy and paste a new one if it
 # is not there) and fill in the details.
 # An explanation of each field is written below.
@@ -16,6 +16,8 @@
 #   tec: TEchnical Co-ordinator - the name and email of
 #   trc: TRaining Co-ordinator - the name and email of
 #   hon: Head Of Node - the name and email of
+#   twitter: The handle of your twitter feed surrounded by apostrophes  e.g. twitter: '@ElixirNodeUK'
+
 
 Belgium:
     country_code: BE
