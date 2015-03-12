@@ -32,18 +32,23 @@ def parse_data(page)
   #  puts "LI: #{li}"
   #end
 
-  # This is not great as it does not get the description, but parsing that is a total pain.
-  # It can be found in #wiki-content-container if anyone wants a go.
-  links = doc.css('#context-menu').search('ul')[0].search('li')
+  links = doc.css('#wiki-content-container').search('ul').search('li')
   links.each do |link|
-    # Chomp due to extraneous \n on each line.
-    href = link.search('a')[0]['href'].chomp
-    text = link.text.gsub(/Tutorial: /,'').chomp
-    next if href =~ /Index/
-    $lessons[href] = {}
-    $lessons[href]['name'] = text
+     if !(a = link.search('a')).empty?
+        href = a[0]['href'].chomp
+        name = a.text
+        puts "Name = #{a.text}" if $debug
+        puts "URL = #{a[0]['href'].chomp}" if $debug
+        description = nil
+        if !(li = link.search('li')).empty?
+             description = li.text
+             puts "Description = #{li.text}" if $debug
+        end
+        $lessons[href] = {}
+        $lessons[href]['name'] = name
+        $lessons[href]['description'] = description
+     end
   end
-
 end
 
 # parse the data
@@ -68,8 +73,14 @@ $lessons.each_key do |key|
   course.owner_org = $owner_org
   course.title = $lessons[key]['name']
   course.set_name($owner_org,$lessons[key]['name'])
-  course.description = $lessons[key]['name']
-  course.notes = "#{$lessons[key]['name']} from #{$root_url + key}, added automatically."
+  if $lessons[key]['description'].nil?
+      course.description = $lessons[key]['name']
+      course.notes = "#{$lessons[key]['name']} from #{$root_url + key}, added automatically."
+  else
+      course.description = $lessons[key]['description']
+      course.notes = $lessons[key]['description']
+
+  end
   course.format = 'html'
 
   # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
