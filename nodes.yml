@@ -185,7 +185,7 @@ Netherlands:
       email:
 
 Norway:
-    country_code: NO
+    country_code: 'NO' # Please note: This must have apostrophes around NO or a peculiar quirk converts it to 'None'. 
     description:
     home_page:
     image_url:
