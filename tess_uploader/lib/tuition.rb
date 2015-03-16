@@ -7,7 +7,7 @@ module Tuition
   def self.compare(current,tess)
     debug = false
     # TODO: Tags need to be fixed...
-    dont_change = %w(id name created last_modified last_update package_id owner_org tags keywords audience url)
+    dont_change = %w(id name created last_modified last_update package_id owner_org keywords audience url)
     newdata = tess
     changed = false
     # Current is an instance of Tuition, and newdata is a hash

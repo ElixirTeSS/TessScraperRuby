@@ -33,3 +33,6 @@ end
 def get_session(page)
  return JSON.parse(open("#{$session_url}/#{page.to_s}").read)['elements']
 end
+
+
+puts "DATA: #{parse_categories}"

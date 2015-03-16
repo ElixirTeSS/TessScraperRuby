@@ -58,11 +58,19 @@ module Uploader
     req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
     req.body = data.to_json
     if data.class == Hash
-      req.body = data.delete_if {|key,value| key == 'tags'}.to_json
+      if url =~ /resource/
+        req.body = data.delete_if {|key,value| key == 'tags'}.to_json
+      else
+        req.body = data.to_json
+      end
       #puts "BODY(1): #{req.body}"
     else
       body = data.dump
-      req.body = body.delete_if {|key,value| key == 'tags'}.to_json
+      if url =~ /resource/
+        req.body = body.delete_if {|key,value| key == 'tags'}.to_json
+      else
+        req.body = body.to_json
+      end
       #puts "BODY(2): #{req.body}"
     end
     req.add_field('Authorization', auth)

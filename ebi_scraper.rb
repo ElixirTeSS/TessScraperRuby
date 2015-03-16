@@ -22,14 +22,17 @@ def parse_data(page)
 
     #puts "TITLES: #{titles.css('a')[0]['href']}, #{titles.text}"
     #puts "DESC: #{desc.text}"
-    #puts "TOPICS: #{topics.collect{|t| t.text }}"
+    puts "TOPICS: #{topics.collect{|t| t.text }}"
 
     href = titles.css('a')[0]['href']
     $lessons[href] = {}
     $lessons[href]['description'] = desc.text.strip
     $lessons[href]['text'] = titles.css('a')[0].text
-    $lessons[href]['topics'] = topics.map{|t| {'name' => t.text.gsub!(/\W/,' ')} } # Replaces extract_keywords
-                                                                                  # Non-alphanumeric purged
+    topic_text =  topics.collect{|t| t.text }
+    if !topic_text.empty?
+      #$lessons[href]['topics'] = topic_text.map{|t| {'name' => t} } # Replaces extract_keywords
+      $lessons[href]['topics'] = topic_text.map{|t| {'name' => t.gsub(/[^0-9a-z ]/i, ' ')} } # Replaces extract_keywords
+    end                                                                             # Non-alphanumeric purged
 
   end
 
@@ -74,7 +77,7 @@ $lessons.each_key do |key|
 
   # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
   # as and where necessary.
-  #puts "COURSE: #{course.to_json}"
+  puts "COURSE: #{course.to_json}"
   Uploader.create_or_update(course)
 
 end
