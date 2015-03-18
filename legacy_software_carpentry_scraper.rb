@@ -22,13 +22,15 @@ def parse_data
         next if basename == "index.md"
         File.foreach(file).with_index do |line,i|
           break if i >= 5
-          puts "LINE: #{line}"
+          puts "LINE: #{line.class}: #{line}"
           if line =~ /title:/
             # We have a lesson, and need to save the URL, title, and tags.
-            title = line.gsub(/title: /)
+            title = line.chomp.gsub(/title: /,'')
             url = "#{$git_url}#{k}/#{value}/#{basename}"
-            tags = {'name' => k.capitalize, 'name' => value.capitalize}
-            $lessons[url] = {'name' => title, 'tags' => tags}
+            tags = [{'name' => k.capitalize}, {'name' => value.capitalize}]
+            $lessons[url] = {}
+            $lessons[url]['tags'] = tags
+            $lessons[url]['name'] = title
             break
           end
         end
