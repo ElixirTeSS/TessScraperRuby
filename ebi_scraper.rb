@@ -30,7 +30,6 @@ def parse_data(page)
     $lessons[href]['text'] = titles.css('a')[0].text
     topic_text =  topics.collect{|t| t.text }
     if !topic_text.empty?
-      #$lessons[href]['topics'] = topic_text.map{|t| {'name' => t} } # Replaces extract_keywords
       $lessons[href]['topics'] = topic_text.map{|t| {'name' => t.gsub(/[^0-9a-z ]/i, ' ')} } # Replaces extract_keywords
     end                                                                             # Non-alphanumeric purged
 
