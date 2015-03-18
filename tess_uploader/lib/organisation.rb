@@ -1,11 +1,13 @@
 class Organisation
-  attr_accessor :title, :name, :description, :image_url
+  attr_accessor :title, :name, :description, :image_url, :homepage, :node_id
 
-  def initialize(title,name,description,image_url)
+  def initialize(title,name,description,image_url,homepage,node_id)
     @title = title || nil
     @name = name || nil
     @description = description || nil
     @image_url = image_url || nil
+    @homepage = homepage || nil
+    @node_id = node_id || nil
   end
 
   def dump

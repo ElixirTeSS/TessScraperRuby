@@ -127,7 +127,9 @@ org_title = 'Goblet'
 org_name = 'goblet'
 org_desc = 'GOBLET, the Global Organisation for Bioinformatics Learning, Education and Training, is a legally registered foundation providing a global, sustainable support and networking structure for bioinformatics educators/trainers and students/trainees .'
 org_image_url = 'http://www.mygoblet.org/sites/default/files/logo_goblet_trans.png'
-organisation = Organisation.new(org_title,org_name,org_desc,org_image_url)
+homepage = $root_url
+node_id = ''
+organisation = Organisation.new(org_title,org_name,org_desc,org_image_url,homepage,node_id)
 Uploader.check_create_organisation(organisation)
 
 

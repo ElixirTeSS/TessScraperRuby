@@ -48,7 +48,9 @@ org_title = 'Software Carpentry'
 org_name = $owner_org
 org_desc = 'The Software Carpentry Foundation is a non-profit organization whose members teach researchers basic software skills.'
 org_image_url = 'http://software-carpentry.org/img/software-carpentry-banner.png'
-organisation = Organisation.new(org_title,org_name,org_desc,org_image_url)
+homepage = 'http://software-carpentry.org/'
+node_id = ''
+organisation = Organisation.new(org_title,org_name,org_desc,org_image_url,homepage,node_id)
 Uploader.check_create_organisation(organisation)
 
 # Upload all the data.

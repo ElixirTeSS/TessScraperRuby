@@ -59,7 +59,9 @@ org_title = 'European Bioinformatics Institute (EBI)'
 org_name = 'european-bioinformatics-institute-ebi'
 org_desc = 'EMBL-EBI provides freely available data from life science experiments, performs basic research in computational biology and offers an extensive user training programme, supporting researchers in academia and industry.'
 org_image_url = 'http://www.ebi.ac.uk/miriam/static/main/img/EBI_logo.png'
-organisation = Organisation.new(org_title,org_name,org_desc,org_image_url)
+homepage = $root_url
+node_id = 'embl-ebi'
+organisation = Organisation.new(org_title,org_name,org_desc,org_image_url,homepage,node_id)
 Uploader.check_create_organisation(organisation)
 
 
