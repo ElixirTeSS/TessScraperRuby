@@ -7,6 +7,7 @@ class TessUploader
   require 'organisation'
   require 'tuition'
   require 'node'
+  require 'package'
 end
 
 
@@ -105,6 +106,13 @@ module Uploader
   def self.create_organisation(data)
     conf = self.get_config
     action = '/api/3/action/organization_create'
+    url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action
+    return self.do_upload(data,url,conf)
+  end
+
+  def self.create_package(data)
+    conf = self.get_config
+    action = '/api/3/action/group_create'
     url = conf['protocol'] + '://' + conf['host'] + ':' + conf['port'].to_s + action
     return self.do_upload(data,url,conf)
   end
