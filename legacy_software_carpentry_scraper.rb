@@ -66,7 +66,7 @@ $lessons.each_key do |key|
 
   # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
   # as and where necessary.
-  puts "COURSE: #{course.to_json}"
-  #Uploader.create_or_update(course)
+  #puts "COURSE: #{course.to_json}"
+  Uploader.create_or_update(course)
 
 end
