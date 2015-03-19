@@ -36,3 +36,13 @@ end
 
 
 puts "DATA: #{parse_categories}"
+
+# Create the organisation.
+org_title = 'Coursera'
+org_name = $owner_org
+org_desc = 'Coursera is an education platform that partners with top universities and organizations worldwide, to offer courses online for anyone to take, for free.'
+org_image_url = 'http://upload.wikimedia.org/wikipedia/commons/e/e5/Coursera_logo.PNG'
+homepage = 'https://www.coursera.org/'
+node_id = ''
+organisation = Organisation.new(org_title,org_name,org_desc,org_image_url,homepage,node_id)
+Uploader.check_create_organisation(organisation)
