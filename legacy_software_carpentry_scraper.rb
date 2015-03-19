@@ -62,7 +62,7 @@ $lessons.each_key do |key|
   course.notes = "#{$lessons[key]['title']} from #{key}, added automatically."
   course.set_name($owner_org,$lessons[key]['title'])
   course.tags = $lessons[key]['tags']
-  course.format = 'markdown'
+  course.format = 'html'
 
   # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
   # as and where necessary.
