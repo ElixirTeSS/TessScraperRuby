@@ -1,25 +1,27 @@
 class Node
-  attr_accessor :title, :name, :country_code, :description, :id, :home_page, :image_url, :twitter,
-                :tec, :tec_email, :trc, :trc_email, :hon, :hon_email
+  attr_accessor :title, :name, :country_code, :description, :staff, :institutions,
+                :id, :home_page, :twitter, :trc, :trc_email, :trc_image, 
+                :carousel_image_1, :carousel_image_2, :carousel_image_3
 
-  def initialize(title,name,country_code,description=nil,home_page=nil,image_url=nil, twitter=nil,
-                 tec_name=nil, tec_email=nil,
-                 trc_name=nil, trc_email=nil, 
-                 hon_name=nil, hon_email=nil)
+  def initialize(title, name, country_code, description=nil, staff=nil, institutions=nil,
+                home_page=nil, twitter=nil, trc=nil, trc_email=nil, trc_image=nil, 
+                carousel_image_1=nil, carousel_image_2=nil, carousel_image_3=nil)
+
     @type = 'node'
     @title = title || nil
     @name = name || nil
     @country_code = country_code || nil
     @description = description
     @home_page = home_page
-    @image_url = image_url
     @twitter = twitter
-    @trc = trc_name
+    @trc = trc
     @trc_email = trc_email
-    @tec = tec_name
-    @tec_email = tec_email
-    @hon = hon_name
-    @hon_email = hon_email
+    @trc_image = trc_image
+    @staff = staff
+    @institutions = institutions
+    @carousel_image_1 = carousel_image_1
+    @carousel_image_2 = carousel_image_2
+    @carousel_image_3 = carousel_image_3
   end
 
   def update_id(id)
