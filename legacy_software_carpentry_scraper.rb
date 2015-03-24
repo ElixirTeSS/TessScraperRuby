@@ -11,12 +11,22 @@ $git_url = "https://github.com/swcarpentry/bc/tree/gh-pages/"
 $skill_levels = {'novice' => %w{extras git hg matlab python r ref shell sql teaching},
                  'intermediate' => %w{doit git make python r regex shell sql webdata}}
 
+$git_repo_remote = "https://github.com/swcarpentry/bc.git"
+$git_repo = Dir.pwd + '/bc/'
+#Not sure if there'll be updates to this repo as its frozen but it can't hurt.
+if File.exists?($git_repo)
+    %x{cd bc && git pull #{$git_repo} & cd ..}
+else
+    %x{git clone #{$git_repo_remote} }
+end
+
 
 def parse_data
   $skill_levels.each_pair do |k,v|
     v.each do |value|
       #puts "Got #{k} lesson category entitled #{value}."
-      files = Dir["#{$git_dir}#{k}/#{value}/*.md"]
+      files = Dir["#{$git_repo}#{k}/#{value}/*.md"]
+      puts files
       files.each do |file|
         basename = File.basename(file)
         next if basename == "README.md"
