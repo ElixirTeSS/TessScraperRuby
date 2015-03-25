@@ -110,9 +110,9 @@ EMBL EBI:
       #John Smith
         #email: j.smith@hotmail.com
         #role: Head of Node
-    twitter:
-    carousel_image_1:
-    carousel_image_2:
+    twitter: emblebi
+    carousel_image_1: /images/nodes/ebi/group.jpg
+    carousel_image_2: /images/nodes/ebi/logo.png
     carousel_image_3:
 
 Estonia:
@@ -267,7 +267,7 @@ Netherlands:
         role: Technical Co-ordinator
       Barend Mons:
         role: Head of Node
-    twitter:
+    twitter: DTL_nl
     carousel_image_1: /images/nodes/nl/windmills.jpg
     carousel_image_2: /images/nodes/nl/canal-boats.jpg
     carousel_image_3:
@@ -388,9 +388,9 @@ Switzerland:
     description:
     home_page:
     institutions:
-      #University of Manchester
-        #home_page: http://uofm.ac.uk
-        #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
+      Swiss Institute of Bioinformatics (SIB):
+        home_page: http://www.isb-sib.ch
+        image: http://www.isb-sib.ch/templates/sib/images/sib_logo.png
     training_coordinator:
       name: Patricia Palagi
       email:
@@ -400,7 +400,7 @@ Switzerland:
       #John Smith
         #email: j.smith@hotmail.com
         #role: Head of Node
-    twitter:
+    twitter: isbsib
     carousel_image_1:
     carousel_image_2:
     carousel_image_3:
