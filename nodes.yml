@@ -37,7 +37,7 @@ Belgium:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Katrijn Vannerum
       email:
       image:
     staff:
@@ -58,7 +58,7 @@ Czech Republic:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Vojtech Spiwok
       email:
       image:
     staff:
@@ -80,7 +80,7 @@ Denmark:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Peter Longreen
       email:
       image:
     staff:
@@ -98,13 +98,13 @@ EMBL EBI:
     description:
     home_page:
     institutions:
-      #University of Manchester
-        #home_page: http://uofm.ac.uk
-        #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
+      European Bioinformatics Institute:
+        home_page: http://www.ebi.ac.uk/
+        image: http://www.sling-fp7.org/system/files/RGB_jpeg_EMBLebi_logo.jpg
     training_coordinator:
-      name:
-      email:
-      image:
+      name: Sarah Morgan
+      email: sarah.morgan@ebi.ac.uk
+      image: http://www.ebi.ac.uk/sites/ebi.ac.uk/files/styles/medium/public/person/image/sarah_squared.jpg
     staff:
       # can repeat
       #John Smith
@@ -124,7 +124,7 @@ Estonia:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Hedi Peterson
       email:
       image:
     staff:
@@ -146,7 +146,7 @@ Finland:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Eija Korpelainen
       email:
       image:
     staff:
@@ -168,7 +168,7 @@ France:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Julie Thompson
       email:
       image:
     staff:
@@ -190,7 +190,7 @@ Greece:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: 
       email:
       image:
     staff:
@@ -212,7 +212,7 @@ Israel:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Michal Linial
       email:
       image:
     staff:
@@ -234,7 +234,7 @@ Italy:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Allegra Via
       email:
       image:
     staff:
@@ -253,21 +253,23 @@ Netherlands:
     description:
     home_page:
     institutions:
-      #University of Manchester
-        #home_page: http://uofm.ac.uk
-        #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
+      Dutch Techcentre for Life Sciences (DTL):
+        home_page: http://www.dtls.nl/
+        image: /images/nodes/nl/dtl.png
     training_coordinator:
-      name:
+      name: Celia van Gelder
       email:
-      image:
+      image:  https://media.licdn.com/mpr/mpr/shrink_500_500/p/4/000/164/1de/3af18f9.jpg
     staff:
       # can repeat
-      #John Smith
+      Rob Hooft:
         #email: j.smith@hotmail.com
-        #role: Head of Node
+        role: Technical Co-ordinator
+      Barend Mons:
+        role: Head of Node
     twitter:
-    carousel_image_1:
-    carousel_image_2:
+    carousel_image_1: /images/nodes/nl/windmills.jpg
+    carousel_image_2: /images/nodes/nl/canal-boats.jpg
     carousel_image_3:
 
 Norway:
@@ -279,9 +281,9 @@ Norway:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Ståle Nygård
       email:
-      image:
+      image: http://www.mn.uio.no/ifi/english/people/aca/staaln/image_100.jpg
     staff:
       # can repeat
       #John Smith
@@ -301,7 +303,7 @@ Portugal:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Pedro Fernandes
       email:
       image:
     staff:
@@ -323,7 +325,7 @@ Slovenia:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Brane L. Leskosek & Peter Juvan
       email:
       image:
     staff:
@@ -345,7 +347,7 @@ Spain:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Oswaldo Trelles
       email:
       image:
     staff:
@@ -367,7 +369,7 @@ Sweden:
         #home_page: http://uofm.ac.uk
         #image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
     training_coordinator:
-      name:
+      name: Sara Light
       email:
       image:
     staff:
@@ -392,7 +394,7 @@ Switzerland:
     training_coordinator:
       name: Patricia Palagi
       email:
-      image:
+      image: http://i1.rgstatic.net/i/profile/e0b495370e0ebdad33_l_ca488.jpg
     staff:
       # can repeat
       #John Smith
@@ -410,7 +412,7 @@ United Kingdom:
     home_page: http://elixir-uk.org
     institutions:
       University of Manchester:
-        home_page: http://uofm.ac.uk
+        home_page: http://www.manchester.ac.uk/
         image: http://www.logodesignblog.net/logos/university-of-manchester-logo.jpg
       University of Oxford:
         home_page: http://www.ox.ac.uk
@@ -418,10 +420,13 @@ United Kingdom:
       University College London:
         home_page: http://www.ucl.ac.uk/
         image: data:image/jpeg;base64,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      
+      TGAC:
+        home_page: http://www.tgac.ac.uk/
+        image: http://www.tgac.ac.uk/v2images/tgac_logo_single.png
     training_coordinator:
-      name: Rita Hendrdicusdottir
-      email: rita.hendricusdottir@dpag.ox.ac.uk
-      image:
+      name: Rita Hendrdicusdottir & Lee Larcombe
+      email: rita.hendricusdottir@dpag.ox.ac.uk lee.larcombe@dpag.ox.ac.uk
+      image: 
     staff:
       # can repeat
       Manuel Corpas:
@@ -432,5 +437,4 @@ United Kingdom:
         role: Head of Node
     twitter: ElixirNodeUK
     carousel_image_1: /images/nodes/uk/flag.jpg
-    carousel_image_2: /images/nodes/uk/cabs.jpg
-    carousel_image_3: /images/nodes/uk/peaks.jpg
+    carousel_image_2: /images/nodes/uk/peaks.jpg
