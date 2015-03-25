@@ -51,14 +51,18 @@ parse_data('course/index.php?categoryid=2')
 
 
 # create the organisation
-org_title = 'SIB'
+org_title = 'Swiss Institute of Bioinformatics'
 org_name = 'sib'
 org_desc = <<EOF
-Swiss Institute of Bioinformatics
+The SIB Swiss Institute of Bioinformatics is an academic, non-profit foundation recognised
+ of public utility and established in 1998. SIB coordinates research and education in
+ bioinformatics throughout Switzerland and provides high quality bioinformatics services 
+to the national and international research community.
 EOF
 org_image_url = 'http://www.isb-sib.ch/templates/sib/images/sib_logo.png'
 home_page = 'http://edu.isb-sib.ch/'
-organisation = Organisation.new(org_title,org_name,org_desc,org_image_url, home_page, 'switzerland')
+node_id = 'switzerland'
+organisation = Organisation.new(org_title,org_name,org_desc,org_image_url,home_page,node_id)
 Uploader.check_create_organisation(organisation)
 
 # do the uploads
