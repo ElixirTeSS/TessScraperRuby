@@ -258,8 +258,8 @@ Netherlands:
         image: /images/nodes/nl/dtl.png
     training_coordinator:
       name: Celia van Gelder
-      email:
-      image:  https://media.licdn.com/mpr/mpr/shrink_500_500/p/4/000/164/1de/3af18f9.jpg
+      email: celia.van.gelder@dtls.nl
+      image: http://www.dtls.nl/wp-content/uploads/2014/10/pasfoto-celia-200x300.jpg
     staff:
       # can repeat
       Rob Hooft:

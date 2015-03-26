@@ -4,7 +4,7 @@ require 'open-uri'
 require 'nokogiri'
 require 'tess_uploader'
 
-$root_url = 'http://edu.isb-sib.ch/course/index.php?categoryid=2'
+$root_url = 'http://edu.isb-sib.ch/'
 $owner_org = 'sib'
 $lessons = {}
 $debug = false
