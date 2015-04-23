@@ -30,6 +30,7 @@
 
 Belgium:
     country_code: BE
+    member_status: Observer
     description:
     home_page:
     institutions:
@@ -51,6 +52,7 @@ Belgium:
 
 Czech Republic:
     country_code: CZ
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -73,6 +75,7 @@ Czech Republic:
 
 Denmark:
     country_code: DK
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -95,6 +98,7 @@ Denmark:
 
 EMBL-EBI:
     country_code: EMBL-EBI
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -117,6 +121,7 @@ EMBL-EBI:
 
 Estonia:
     country_code: EE
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -139,6 +144,7 @@ Estonia:
 
 Finland:
     country_code: FI
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -161,6 +167,7 @@ Finland:
 
 France:
     country_code: FR
+    member_status: Observer
     description:
     home_page:
     institutions:
@@ -183,6 +190,7 @@ France:
 
 Greece:
     country_code: GR
+    member_status: Observer
     description:
     home_page:
     institutions:
@@ -205,6 +213,7 @@ Greece:
 
 Israel:
     country_code: IL
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -227,6 +236,7 @@ Israel:
 
 Italy:
     country_code: IT
+    member_status: Observer
     description:
     home_page:
     institutions:
@@ -250,6 +260,7 @@ Italy:
 
 Netherlands:
     country_code: NL
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -274,6 +285,7 @@ Netherlands:
 
 Norway:
     country_code: 'NO'
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -296,6 +308,7 @@ Norway:
 
 Portugal:
     country_code: PT
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -318,6 +331,7 @@ Portugal:
 
 Slovenia:
     country_code: SI
+    member_status: Observer
     description:
     home_page:
     institutions:
@@ -340,6 +354,7 @@ Slovenia:
 
 Spain:
     country_code: ES
+    member_status: Observer
     description:
     home_page:
     institutions:
@@ -362,6 +377,7 @@ Spain:
 
 Sweden:
     country_code: SE
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -385,6 +401,7 @@ Sweden:
 
 Switzerland:
     country_code: CH
+    member_status: Member
     description:
     home_page:
     institutions:
@@ -408,6 +425,7 @@ Switzerland:
 
 United Kingdom:
     country_code: GB
+    member_status: Member
     description: ELIXIR UK, a part of the ELIXIR community, is taking a UK and European lead in training. ELIXIR UK’s aim, to facilitate access to training in UK and across Europe for scientists in both academia and industry, will allow researchers to combine their experimental expertise with available computational infrastructure to address critical research questions. Only then will biological Big Data be transformed efficiently into meaningful results that lead to new discoveries and innovations.
     home_page: http://elixir-uk.org
     institutions:

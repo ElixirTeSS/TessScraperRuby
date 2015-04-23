@@ -24,6 +24,7 @@ begin
         
         node = Node.new(title, name, 
                         info['country_code'], info['description'],
+                        info['member_status']
                         staff_members, member_institutions,
                         info['home_page'], info['twitter'],
                         info['training_coordinator']['name'], 
