@@ -23,8 +23,9 @@ begin
         member_institutions = jsonify('institutions', info)
         
         node = Node.new(title, name, 
-                        info['country_code'], info['description'],
-                        info['member_status']
+                        info['country_code'],
+                        info['member_status'],
+                        info['description'],
                         staff_members, member_institutions,
                         info['home_page'], info['twitter'],
                         info['training_coordinator']['name'], 

@@ -1,9 +1,9 @@
 class Node
-  attr_accessor :title, :name, :country_code, :description, :staff, :institutions,
+  attr_accessor :title, :name, :country_code, :member_status, :description, :staff, :institutions,
                 :id, :home_page, :twitter, :trc, :trc_email, :trc_image, 
                 :carousel_image_1, :carousel_image_2, :carousel_image_3
 
-  def initialize(title, name, country_code, description=nil, staff=nil, institutions=nil,
+  def initialize(title, name, country_code, member_status, description=nil, staff=nil, institutions=nil,
                 home_page=nil, twitter=nil, trc=nil, trc_email=nil, trc_image=nil, 
                 carousel_image_1=nil, carousel_image_2=nil, carousel_image_3=nil)
 
@@ -11,6 +11,7 @@ class Node
     @title = title || nil
     @name = name || nil
     @country_code = country_code || nil
+    @member_status = member_status || 'Interested'
     @description = description
     @home_page = home_page
     @twitter = twitter
