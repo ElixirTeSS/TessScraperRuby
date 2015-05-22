@@ -68,7 +68,7 @@ Uploader.check_create_organisation(organisation)
 # do the uploads
 $lessons.each_key do |key|
   course = Tuition::Tutorial.new
-  course.url = $root_url + key
+  course.url = key
   course.owner_org = $owner_org
   course.title = $lessons[key]['name']
   course.set_name($owner_org,$lessons[key]['name'])
