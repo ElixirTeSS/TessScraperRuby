@@ -8,4 +8,3 @@ ruby genome3d_scraper.rb
 ruby legacy_software_carpentry_scraper.rb
 ruby coursera_scraper.rb
 ruby sib_scraper.rb
-

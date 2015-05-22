@@ -223,41 +223,7 @@ module Uploader
         puts 'DATASET: Something has changed.'
         update = self.update_dataset(changes)
         if !update.empty?
-          puts 'Package updated.'
-          # Update the resources for each dataset.
-          if !data_exists['resources'].nil? and data_exists['resources'].length > 0
-            resources.each do |res|
-              #puts "RES: #{res}"
-              res_changes = Tuition.compare(data,res)
-              if !res_changes.empty?
-                # It appears that the previous update to the dataset wipes out all the resources. Therefore,
-                # the only option would seem to be to create the resource again.
-                res_changes['package_id'] = data_exists['id']
-                res_changes['name'] = data_exists['name'] + '-link'
-                #res_updated = self.create_resource(res_changes.delete_if {|key,value| key == 'resources'})
-                res_updated = self.update_resource(res_changes)
-                if !res_updated.empty?
-                  puts 'Resource updated.'
-                else
-                  puts 'Failed to update resource.'
-                end
-              end
-            end
-          else
-            # No resources, so create one. This might be the case because previous bugs with this
-            # or earlier scripts have wiped out the resources.
-            data.package_id = data_exists['id']
-            data.name = data_exists['name'] + '-link'
-            #puts "DUMP1: #{data.dump}"
-            #puts "DUMP2: #{data.dump.delete_if {|key,value| key == 'resources'}}"
-            res_updated = self.create_resource(data)
-            #puts "DATA: #{data.dump}"
-            if !res_updated.empty?
-              puts 'Missing resource recreated.'
-            else
-              puts 'Failed to recreate missing resource.'
-            end
-          end
+          puts 'Dataset updated.'
         end
       else
         puts 'DATASET: No change.'
@@ -266,18 +232,10 @@ module Uploader
       # This is not present on TeSS and should be added.
       puts 'Creating dataset.'
       dataset = self.create_dataset(data)
-      #puts "Dataset: #{dataset}"
       if !dataset.nil?
-        data.package_id = dataset['id']
-        data.name = data.name + '-link'
-        resource = self.create_resource(data)
-        #puts "Preparing to send: #{data.to_json}"
-        puts "resource: #{resource}"
-        if resource.nil?
-          puts 'Resource not created!'
-        end
+        puts "Dataset created!"
       else
-        puts 'Could not create dataset, so no resource created!'
+        puts 'Could not create dataset!'
       end
     end
 
