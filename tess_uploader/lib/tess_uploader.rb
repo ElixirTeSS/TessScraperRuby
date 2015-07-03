@@ -60,9 +60,10 @@ module Uploader
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
-    req = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
+    req = Net::HTTP::Post.new(uri.request_uri, initheader = { 'Content-Type' =>'application/json' })
     req.body = data.to_json
     req.add_field('Authorization', auth)
+    req.add_field('X-CKAN-API-Key', auth)
 
     req.body = data.to_json
     if data.class == Hash
@@ -191,6 +192,8 @@ module Uploader
     req = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
     req.body = data.to_json
     req.add_field('Authorization', auth)
+    req.add_field('X-CKAN-API-Key', auth)
+
     res = http.request(req)
 
     unless res.code == '200'
