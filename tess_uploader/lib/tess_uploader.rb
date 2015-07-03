@@ -4,6 +4,7 @@ class TessUploader
   # Placeholder class.
   require 'inifile'
   require 'net/http'
+  require 'net/https'
   require 'organisation'
   require 'tuition'
   require 'node'
@@ -53,9 +54,16 @@ module Uploader
       return
     end
 
-
     uri = URI(url)
-    req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
+    http = Net::HTTP.new(uri.host, uri.port)
+    if url =~ /https/
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+    req = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
+    req.body = data.to_json
+    req.add_field('Authorization', auth)
+
     req.body = data.to_json
     if data.class == Hash
       if url =~ /resource/
@@ -74,9 +82,7 @@ module Uploader
       #puts "BODY(2): #{req.body}"
     end
     req.add_field('Authorization', auth)
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-      http.request(req)
-    end
+    res = http.request(req)
 
     unless res.code == '200'
       puts "Upload failed: #{res.code}"
@@ -176,13 +182,17 @@ module Uploader
       return {}
     end
     uri = URI(url)
-    puts "URL: #{url}"
-    req = Net::HTTP::Post.new(uri, initheader = {'Content-Type' =>'application/json'})
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    if url =~ /https/
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+    req = Net::HTTP::Post.new(uri.request_uri, initheader = {'Content-Type' =>'application/json'})
     req.body = data.to_json
     req.add_field('Authorization', auth)
-    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-      http.request(req)
-    end
+    res = http.request(req)
+
     unless res.code == '200'
       puts "Check returned: #{res.code}"
       return {}

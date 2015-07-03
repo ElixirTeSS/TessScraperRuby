@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'tess_uploader'
-  s.version     = '0.0.1'
+  s.version     = '0.1.0'
   s.date        = '2015-03-03'
   s.summary     = 'Libraries for uploading files to http://tess.oerc.ox.ac.uk'
   s.description = 'Uses the CKAN API on http://tess.oerc.ox.ac.uk to upload data in the format being used by the TeSS project.'

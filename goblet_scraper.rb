@@ -7,7 +7,7 @@ require 'tess_uploader'
 $root_url = 'http://www.mygoblet.org/'
 $owner_org = 'goblet'
 $lessons = {}
-$debug = false
+$debug = true
 
 def parse_data(page)
     topic_match = Regexp.new('topic-tags')
