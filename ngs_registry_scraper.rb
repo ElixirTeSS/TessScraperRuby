@@ -12,17 +12,14 @@ $owner_org = 'ngs_registry'
 $topics = {}
 $root_url = 'https://microasp.upsc.se/ngs_trainers/Materials/tree/master/'
 
-
 $lessons = JSON.parse(open($json_file).read)
-
-
 
 # Create the organisation.
 org_title = 'NGS Registry'
 org_name = $owner_org
 org_desc = 'GitLab registry containing NGS Training Materials'
 org_image_url = ''
-homepage = 'https://microasp.upsc.se/'
+homepage = 'https://microasp.upsc.se/ngs_trainers/Materials/wikis/home'
 node_id = ''
 organisation = Organisation.new(org_title,org_name,org_desc,org_image_url,homepage,node_id)
 Uploader.check_create_organisation(organisation)
@@ -42,14 +39,17 @@ $lessons.each do |lesson|
     course.description = material['title']
     course.notes = "#{material['title']} from #{$root_url + key}, added automatically."
   else
-    course.description = material['full'].join('')
+    description = material['full']
+    description.each_with_index do |chunk, index|
+      if chunk == '## Keywords\\n'
+          puts "descrption - #{description[index+1]}\n\n\n\n"
+      end
+    end
+    course.description = description
     course.notes = material['full'].join('')
   end
 
-
-  puts "course = #{course.dump}\n\n\n\n"
   course.format = 'html'
-
   # Before attempting to create anything we need to check if the resource/dataset already exists, updating it
   # as and where necessary.
   Uploader.create_or_update(course)
