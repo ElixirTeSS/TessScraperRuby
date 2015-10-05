@@ -40,12 +40,21 @@ $lessons.each do |lesson|
     course.notes = "#{material['title']} from #{$root_url + key}, added automatically."
   else
     description = material['full']
-    description.each_with_index do |chunk, index|
-      if chunk == '## Keywords\\n'
-          puts "descrption - #{description[index+1]}\n\n\n\n"
-      end
+    sections = ["## Keywords\n", "## Target audience (at least beginner/advanced)\n"]
+
+    keywords_index = description.find_index(sections[0])
+    if !keywords_index.nil?
+      puts description[keywords_index+1]
+      a = description[keywords_index+1].split(',').map{|t| {'name' => t}}
+      course.tags = a
     end
-    course.description = description
+
+    audience_index = description.find_index(sections[1])
+    if !audience_index.nil?
+      course.audience = description[audience_index+2]
+    end
+
+    course.description = description.join('')
     course.notes = material['full'].join('')
   end
 
